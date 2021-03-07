@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %X{requestid} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	        <level>DEBUG</level>
+	    </filter>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<file>/logs/MyBasket/MyBasket.log
+		
+		</file>
+		
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+		
+			<fileNamePattern>/log/MyBasket/MyBasket.log.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %X{requestid} [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+  <logger name="org.springframework">
+        <level value="ERROR" />
+    </logger>
+    <logger name="org.hibernate.SQL">
+    <level value="DEBUG" />
+    </logger>
+    
+      <logger name="org.hibernate.type">
+    <level value="TRACE" />
+    </logger>
+
+	<!--  Application specific logger -->
+	<logger name="org.spirngframework">
+		<level value="DEBUG"/>
+	</logger>
+	<logger name="net.one97">
+		<level value="INFO"/>
+	</logger>
+
+	<root level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>
